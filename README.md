@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laracon.eu/" target="_blank"><img src="https://pbs.twimg.com/media/Fji-qHJX0AItpU7?format=png" width="400" alt="Laravel Octane: the Nitro for your Web"></a></p>
+<p align="center"><a href="https://laracon.eu/" target="_blank"><img src="https://pbs.twimg.com/media/Fji-qHJX0AItpU7?format=png" width="600" alt="Laravel Octane: the Nitro for your Web"></a></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework?color=%23eb4432&label=Laravel%20Version&logo=laravel&logoColor=%23ffffff&style=for-the-badge" alt="Latest Laravel Stable Version"></a>
