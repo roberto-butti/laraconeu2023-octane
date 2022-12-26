@@ -1,7 +1,7 @@
 {
-    "name": "nitro-talk",
+    "name": "roberto-butti/laraconeu2023-octane",
     "type": "project",
-    "description": "Laravel Octane: the Nitro for your Web.",
+    "description": "Laravel Octane the Nitro for your Web.",
     "keywords": ["framework", "laravel", "octane"],
     "license": "MIT",
     "require": {
