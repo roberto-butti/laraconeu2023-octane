@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $server = App::make(Swoole\Http\Server::class);
+    $workerId = $server->getWorkerId();
+    Log::debug("REQUEST " . $workerId);
     return view('welcome');
 });
