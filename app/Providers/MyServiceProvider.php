@@ -10,16 +10,16 @@ class MyServiceProvider extends ServiceProvider
     public function __construct($app)
     {
         parent::__construct($app);
-        Log::debug("CONSTRUCT");
+        Log::debug('CONSTRUCT');
     }
 
     public function register()
     {
-        Log::debug("REGISTER");
+        Log::debug('REGISTER');
     }
 
     public function boot()
     {
-        Log::debug("BOOT");
+        Log::debug('BOOT');
     }
 }
