@@ -4,22 +4,12 @@
 $server = new Swoole\HTTP\Server('127.0.0.1', 9501);
 $server->set([
     'worker_num' => 5, // 5 workers up and runnig
-/*
+    /*
 Algorithm used to dispatch connections to workers
 https://openswoole.com/docs/modules/swoole-server/configuration#dispatch_mode
 */
     'dispatch_mode' => 1, // 1 = Round Robin
 ]);
-
-
-
-
-
-
-
-
-
-
 
 // Triggered when new worker processes starts
 $server->on('WorkerStart', function ($server, $workerId) {
@@ -41,14 +31,6 @@ $server->on('request', function (
     $response->end('Hello World served by '.$server->getWorkerId());
 });
 
-
-
-
-
-
-
-
-
 /*
 | Starts the Swoole Server,
 | will create worker_num + 2 processes by default
@@ -57,15 +39,3 @@ $server->on('request', function (
  */
 $server->start();
 echo ' AFTER'.PHP_EOL;
-
-
-
-
-
-
-
-
-
-
-
-
