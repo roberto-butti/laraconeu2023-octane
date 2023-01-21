@@ -79,6 +79,45 @@ Route::get('/parallel-task', function () {
     return new Response('Hi LaraconEU, (task in parallel), '.$result1.' - '.$result2);
 })->name('parallel-task');
 
+/*
+|--------------------------------------------------------------------------
+| Cache
+|--------------------------------------------------------------------------
+|
+| Using Cache::store('octane') for getting instance
+| put() to set the value in cache
+| get() to get the value from cache
+|
+*/
+Route::get('/set-random-number', function () {
+    $number = random_int(1, 6);
+    Cache::store('octane')->put('last-random-number', $number);
+
+    return $number;
+})->name('set-cache');
+
+Route::get('/get-random-number', function () {
+    $number = Cache::store('octane')->get('last-random-number', 0);
+
+    return $number;
+})->name('get-cache');
+
+/*
+|--------------------------------------------------------------------------
+| Cache Only strategy
+|--------------------------------------------------------------------------
+|
+| The cached number is filled in AppServiceProvider using tick() method.
+| Here, we retrieve the value from cache.
+| Strong assumption: the value is stored in the cache.
+|
+*/
+Route::get('/get-random-number-cache-only', function () {
+    $number = Cache::store('octane')->get('number-cacheonly', 0);
+
+    return $number;
+})->name('get-cache-only');
+
 Route::get('/', function () {
     $server = App::make(Swoole\Http\Server::class);
     $workerId = $server->getWorkerId();
