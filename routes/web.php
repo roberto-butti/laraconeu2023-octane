@@ -47,6 +47,38 @@ function () {
 }
 )->name('route-get');
 
+/*
+|--------------------------------------------------------------------------
+| Parallel functions
+|--------------------------------------------------------------------------
+|
+| Using Octane::concurrently()
+|
+*/
+function functions()
+{
+    $randomInt = function () {
+        sleep(2);
+
+        return random_int(1, 10);
+    };
+
+    return [$randomInt, $randomInt];
+}
+Route::get('/serial-task', function () {
+    [$result1, $result2] = functions();
+
+    return new Response('Hi LaraconEU, (one task at a time), '.$result1().' - '.$result2());
+})->name('serial-task');
+
+Route::get('/parallel-task', function () {
+    [$result1, $result2] = Octane::concurrently(
+        functions()
+    );
+
+    return new Response('Hi LaraconEU, (task in parallel), '.$result1.' - '.$result2);
+})->name('parallel-task');
+
 Route::get('/', function () {
     $server = App::make(Swoole\Http\Server::class);
     $workerId = $server->getWorkerId();
