@@ -147,8 +147,8 @@ return [
     */
 
     'cache' => [
-        'rows' => 1000,
-        'bytes' => 10000,
+        'rows' => 1_000, // max 1000 elements
+        'bytes' => 10_000, // max 10000 bytes for each row
     ],
 
     /*
@@ -164,7 +164,7 @@ return [
 
     'tables' => [
         'example:1000' => [
-            'name' => 'string:1000',
+            'name' => 'string:500',
             'votes' => 'int',
         ],
     ],

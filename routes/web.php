@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExampleController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -117,6 +118,35 @@ Route::get('/get-random-number-cache-only', function () {
 
     return $number;
 })->name('get-cache-only');
+
+/*
+|--------------------------------------------------------------------------
+| Swoole Table
+|--------------------------------------------------------------------------
+|
+| - Create values in table
+| - Get a value in table
+|
+*/
+Route::get('/create-table', function () {
+    $faker = Faker\Factory::create();
+    $table = Octane::table('example');
+    for ($i = 0; $i < 500; $i++) {
+        $table->set($i,
+            [
+                'name' => $faker->firstName(),
+                'votes' => random_int(1, 1000),
+            ]);
+    }
+
+    return "Created $i rows";
+})->name('create-table');
+
+Route::get('/get-table', function () {
+    $table = Octane::table('example');
+
+    return $table->get(random_int(1, 500));
+})->name('get-table');
 
 Route::get('/', function () {
     $server = App::make(Swoole\Http\Server::class);
