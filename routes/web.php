@@ -148,9 +148,29 @@ Route::get('/get-table', function () {
     return $table->get(random_int(1, 500));
 })->name('get-table');
 
-Route::get('/', function () {
+/*
+|--------------------------------------------------------------------------
+| Using Swoole methods
+|--------------------------------------------------------------------------
+|
+| Using Swoole with Laravel Octane,
+| you can access to Swoole methods, for example stats()
+|
+*/
+Route::get('/metrics', function () {
     $server = App::make(Swoole\Http\Server::class);
-    $workerId = $server->getWorkerId();
+
+    return $server->stats(\OPENSWOOLE_STATS_OPENMETRICS);
+})->name('metrics');
+
+Route::get('/', function () {
+    $workerId = '';
+    try {
+        $server = App::make(Swoole\Http\Server::class);
+        $workerId = $server->getWorkerId();
+    } catch (Exception $e) {
+        $workerId = '-';
+    }
     Log::debug('REQUEST '.$workerId);
 
     return view('welcome');
